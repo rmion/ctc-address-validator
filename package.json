@@ -1,0 +1,21 @@
+{
+    "name": "names",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@google/maps": "1.1.0",
+        "agent-base": "4.3.0",
+        "debug": "3.2.6",
+        "es6-promise": "4.2.8",
+        "es6-promisify": "5.0.0",
+        "https-proxy-agent": "3.0.1",
+        "ms": "2.1.2",
+        "uuid": "7.0.2"      
+    }
+  }
