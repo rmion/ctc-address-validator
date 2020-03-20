@@ -6,11 +6,6 @@ const coordMap = NPAs.map(function (item) {
     return arr[0][0]
   });
 
-const googleMapsClient = require('@google/maps').createClient({
-    key: 'AIzaSyC9V1ulwG-kAEnFDqvIOCql6t6E-A0y0T8',
-    Promise: Promise
-  });
-
 function isPointInsidePolygon(point, poly) {
     var x = point.lng, y = point.lat;
   
@@ -30,31 +25,18 @@ function isPointInsidePolygon(point, poly) {
 
 exports.handler = function(event, context, callback) {
     var resultList = []
-    var formattedAddress = event.queryStringParameters.address + ", Charlotte, NC"
-    googleMapsClient.geocode({
-      address: formattedAddress
-    }).asPromise()
-      .then((response) => {
-        coordMap.forEach(function(poly) {
-          resultList.push(
+    var coords = event.queryStringParameters.lat + event.queryStringParameters.lng
+    coordMap.forEach(function(poly) {
+        resultList.push(
             isPointInsidePolygon(
-              response.json.results[0].geometry.location,
-              poly
+                coords,
+                poly
             )
-          )
-        })
-
-        callback(null, {
-            statusCode: 200,
-            // body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
-            body: JSON.stringify({ address: formattedAddress, list: resultList })
-            });        
-      })
-      .catch((err) => {
-        callback(null, {
-            statusCode: 200,
-            // body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
-            body: err
-            });        
-      });
+        )
+    })
+    callback(null, {
+        statusCode: 200,
+        // body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
+        body: JSON.stringify({ list: resultList })
+        });
 }
