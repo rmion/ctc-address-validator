@@ -50,5 +50,11 @@ exports.handler = function(event, context, callback) {
             body: JSON.stringify({ address: formattedAddress, list: resultList })
             });        
       })
-
+      .catch((err) => {
+        callback(null, {
+            statusCode: 200,
+            // body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
+            body: err
+            });        
+      });
 }
