@@ -25,7 +25,7 @@ function isPointInsidePolygon(point, poly) {
 
 exports.handler = function(event, context, callback) {
     var resultList = []
-    var coords = { lat: event.queryStringParameters.lat, lng: event.queryStringParameters.lng }
+    var coords = { lng: event.queryStringParameters.lat, lat: event.queryStringParameters.lng }
     coordMap.forEach(function(poly) {
         resultList.push(
             isPointInsidePolygon(
