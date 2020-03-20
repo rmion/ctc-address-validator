@@ -36,7 +36,6 @@ exports.handler = function(event, context, callback) {
     })
     callback(null, {
         statusCode: 200,
-        // body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
-        body: JSON.stringify({ list: resultList })
+        body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
         });
 }
