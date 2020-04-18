@@ -36,7 +36,8 @@ exports.handler = function(event, context, callback) {
     })
     callback(null, {
         headers: {
-            "Access-Control-Allow-Origin": "https://crowntowncompost.com"
+            "Access-Control-Allow-Origin": "https://crowntowncompost.com",
+            "Access-Control-Aloow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
           },
         statusCode: 200,
         body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
