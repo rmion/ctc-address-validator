@@ -29,8 +29,7 @@ exports.handler = async function(event, context) {
     let zip = event.queryStringParameters.zip;
 
     let response = await axios.get(`https://api.geocod.io/geocode?q=${street}+${city}+${state}+${zip}&api_key=0705bbee5f2cd5555ec0bcff5c772fecc777255`)
-    let data = await response.json()
-    let location = data.results[0].location
+    let location = response.results[0].location
 
     var resultList = []
     var coords = { lat: location.lat, lng: location.lng }
