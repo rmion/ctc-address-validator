@@ -1,4 +1,5 @@
-import { NPAs } from "./NPAs.mjs"
+// import { NPAs } from "./NPAs.mjs"
+const NPAs = require('./NPAs.mjs')
 
 const coordMap = NPAs.map(function (item) {
     return item.geometry.coordinates;
