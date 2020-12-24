@@ -1,5 +1,5 @@
 // import { NPAs } from "./NPAs.mjs"
-const NPAs = require('./NPAs.mjs')
+const NPAs = require('./NPAs.js')
 const axios = require('axios');
 
 const coordMap = NPAs.map(function (item) {
