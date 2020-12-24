@@ -1,4 +1,5 @@
 import { NPAs } from "/NPAs.js"
+const axios = require('axios');
 
 const coordMap = NPAs.map(function (item) {
     return item.geometry.coordinates;
@@ -20,9 +21,18 @@ function isPointInsidePolygon(point, poly) {
     return inside;
   };        
 
-exports.handler = function(event, context, callback) {
+exports.handler = async function(event, context) {
+    let street = event.queryStringParameters.street;
+    let city = event.queryStringParameters.city;
+    let state = event.queryStringParameters.state;
+    let zip = event.queryStringParameters.zip;
+
+    let response = await axios.get(`https://api.geocod.io/geocode?q=${street}+${city}+${state}+${zip}&api_key=0705bbee5f2cd5555ec0bcff5c772fecc777255`)
+    let data = await response.json()
+    let location = data.results[0].location
+
     var resultList = []
-    var coords = { lat: event.queryStringParameters.lat, lng: event.queryStringParameters.lng }
+    var coords = { lat: location.lat, lng: location.lng }
     coordMap.forEach(function(poly) {
         resultList.push(
             isPointInsidePolygon(
@@ -31,12 +41,8 @@ exports.handler = function(event, context, callback) {
             )
         )
     })
-    callback(null, {
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-          },
+    return {
         statusCode: 200,
         body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
-    });
+    }
 }
