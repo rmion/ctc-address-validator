@@ -934,4 +934,4 @@ let filteredNPAs = allNPAs.filter(el => {
     return ctcNPAs.includes(el.properties.id)
 })
 
-export default filteredNPAs
+module.exports = filteredNPAs
