@@ -42,6 +42,10 @@ exports.handler = async function(event, context) {
         )
     })
     return {
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+          },
         statusCode: 200,
         body: JSON.stringify({ valid: resultList.includes(true) }, null, 3)
     }
